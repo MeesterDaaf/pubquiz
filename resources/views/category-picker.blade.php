@@ -238,8 +238,8 @@
     <div class="w-full max-w-7xl mx-auto disco-overlay">
         <div class="title-container text-center">
             <div class="title-decoration"></div>
-            <h1 class="title-main">Hitster Bingo</h1>
-            <p class="title-subtitle">Categorie Kiezer</p>
+            <h1 class="title-main">CAFE KOSMOS</h1>
+            <p class="title-subtitle">Hitster Bingo</p>
         </div>
 
         <div class="flex flex-col lg:flex-row gap-6">
