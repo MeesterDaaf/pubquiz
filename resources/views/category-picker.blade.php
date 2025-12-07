@@ -36,16 +36,7 @@
             }
         }
 
-        @keyframes discoShimmer {
-            0% {
-                background-position: -200% center;
-            }
-            100% {
-                background-position: 200% center;
-            }
-        }
-
-        .disco-bg {
+        .disco-lights{
             background: linear-gradient(
                 45deg,
                 #ff006e,
@@ -58,6 +49,137 @@
             );
             background-size: 400% 400%;
             animation: discoGradient 8s ease infinite;
+        }
+
+        @keyframes discoShimmer {
+            0% {
+                background-position: -200% center;
+            }
+            100% {
+                background-position: 200% center;
+            }
+        }
+
+        @keyframes titleGlow {
+            0%, 100% {
+                text-shadow:
+                    0 0 10px rgba(255, 0, 110, 0.8),
+                    0 0 20px rgba(131, 56, 236, 0.6),
+                    0 0 30px rgba(58, 134, 255, 0.4);
+            }
+            50% {
+                text-shadow:
+                    0 0 20px rgba(255, 0, 110, 1),
+                    0 0 30px rgba(131, 56, 236, 0.8),
+                    0 0 40px rgba(58, 134, 255, 0.6),
+                    0 0 50px rgba(6, 255, 165, 0.4);
+            }
+        }
+
+        @keyframes titleBounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes gradientText {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .title-container {
+            position: relative;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .title-main {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(
+                45deg,
+                #ff006e,
+                #8338ec,
+                #3a86ff,
+                #06ffa5,
+                #ffbe0b,
+                #fb5607,
+                #ff006e
+            );
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientText 5s ease infinite, titleGlow 2s ease-in-out infinite, titleBounce 3s ease-in-out infinite;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+        }
+
+        .title-subtitle {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .title-decoration {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: discoRotate 10s linear infinite;
+            pointer-events: none;
+        }
+
+        .title-decoration::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 150px;
+            border: 2px solid rgba(255, 0, 110, 0.3);
+            border-radius: 50%;
+            animation: discoRotate 8s linear infinite reverse;
+        }
+
+        @media (max-width: 640px) {
+            .title-main {
+                font-size: 2.5rem;
+            }
+            .title-subtitle {
+                font-size: 1rem;
+            }
+        }
+
+        .disco-bg {
+            background-image: url('{{ asset("storage/images/bg-bingo.png") }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             position: relative;
             overflow: hidden;
         }
@@ -70,10 +192,11 @@
             right: 0;
             bottom: 0;
             background:
-                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
             animation: discoRotate 20s linear infinite;
+            pointer-events: none;
         }
 
         .disco-bg::after {
@@ -83,15 +206,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background:
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(255, 255, 255, 0.03) 2px,
-                    rgba(255, 255, 255, 0.03) 4px
-                );
-            animation: discoPulse 3s ease-in-out infinite;
+            background: rgba(0, 0, 0, 0.2);
+            pointer-events: none;
         }
 
         .disco-overlay {
@@ -108,24 +224,27 @@
             background: linear-gradient(
                 45deg,
                 transparent 30%,
-                rgba(255, 255, 255, 0.1) 50%,
+                rgba(255, 255, 255, 0.05) 50%,
                 transparent 70%
             );
-            animation: discoShimmer 4s linear infinite;
+            animation: discoShimmer 6s linear infinite;
             pointer-events: none;
+            opacity: 0.6;
         }
     </style>
 </head>
 <body class="disco-bg text-white min-h-screen flex items-center justify-center p-6">
     <div class="disco-shine"></div>
-    <div class="w-full max-w-4xl mx-auto disco-overlay">
-    <div class="w-full max-w-4xl mx-auto">
-            <div class="text-center mb-8">
-                <h1 class="text-4xl font-bold mb-2 text-[#1b1b18] dark:text-white drop-shadow-lg">Hitster Bingo</h1>
-                <p class="text-lg text-[#706f6c] dark:text-[#A1A09A]">Categorie Kiezer</p>
-            </div>
+    <div class="w-full max-w-7xl mx-auto disco-overlay">
+        <div class="title-container text-center">
+            <div class="title-decoration"></div>
+            <h1 class="title-main">Hitster Bingo</h1>
+            <p class="title-subtitle">Categorie Kiezer</p>
+        </div>
 
-        <div class="bg-white/95 dark:bg-[#161615]/95 backdrop-blur-sm rounded-lg shadow-2xl p-8 border-2 border-white/20">
+        <div class="flex flex-col lg:flex-row gap-6">
+            <!-- Main Content -->
+            <div class="disco-lights  flex-1 bg-white/95 dark:bg-[#161615]/95 backdrop-blur-sm rounded-lg shadow-2xl p-8 border-2 border-white/20">
             <!-- Timer Display -->
             <div class="text-center mb-8">
                 <div id="timer" class="text-6xl font-bold text-[#f53003] dark:text-[#FF4433] mb-4">
@@ -203,8 +322,26 @@
                     >
                 </div>
             </div>
+            </div>
+
+            <!-- History Sidebar -->
+            <div class="disco-lights w-full lg:w-80 bg-white/95 dark:bg-[#161615]/95 backdrop-blur-sm rounded-lg shadow-2xl p-6 border-2 border-white/20">
+                <h2 class="text-xl font-bold text-[#1b1b18] dark:text-[#EDEDEC] mb-4 text-center">Geschiedenis</h2>
+                <div id="history-container" class="max-h-[calc(100vh-300px)] overflow-y-auto">
+                    <div id="history-list" class="space-y-2">
+                        <p class="text-sm text-[#706f6c] dark:text-[#A1A09A] text-center italic">Nog geen categorieën gekozen</p>
+                    </div>
+                </div>
+                <div class="mt-4 text-center">
+                    <button
+                        id="clear-history-button"
+                        class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm font-medium transition-colors hidden"
+                    >
+                        Geschiedenis wissen
+                    </button>
+                </div>
+            </div>
         </div>
-    </div>
     </div>
 
     <script>
@@ -215,6 +352,7 @@
         let spinInterval = null;
         let timeRemaining = 3;
         let selectedCategory = null;
+        let history = []; // Array to store chosen categories
 
         // Draw wheel segments
         function drawWheel() {
@@ -449,10 +587,47 @@
                             spinButton.disabled = false;
                             resetButton.classList.remove('hidden');
                             isSpinning = false;
+
+                            // Add to history
+                            addToHistory(selectedCategory);
                         }
                     }, 20);
                 }
             }, 1000);
+        }
+
+        function addToHistory(category) {
+            history.push(category);
+            updateHistoryDisplay();
+        }
+
+        function updateHistoryDisplay() {
+            const historyList = document.getElementById('history-list');
+            const clearButton = document.getElementById('clear-history-button');
+
+            if (history.length === 0) {
+                historyList.innerHTML = '<p class="text-sm text-[#706f6c] dark:text-[#A1A09A] text-center italic">Nog geen categorieën gekozen</p>';
+                clearButton.classList.add('hidden');
+            } else {
+                historyList.innerHTML = history.map((category, index) => {
+                    return `
+                        <div class="flex items-center gap-3 p-3 bg-[#f5f5f5] dark:bg-[#2a2a2a] rounded-lg border border-[#e3e3e0] dark:border-[#3E3E3A]">
+                            <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-[#f53003] dark:bg-[#FF4433] text-white font-bold rounded-full text-sm">
+                                ${index + 1}
+                            </span>
+                            <span class="flex-1 text-[#1b1b18] dark:text-[#EDEDEC] font-medium">${category}</span>
+                        </div>
+                    `;
+                }).join('');
+                clearButton.classList.remove('hidden');
+            }
+        }
+
+        function clearHistory() {
+            if (confirm('Weet je zeker dat je de geschiedenis wilt wissen?')) {
+                history = [];
+                updateHistoryDisplay();
+            }
         }
 
         function reset() {
@@ -477,9 +652,11 @@
         document.addEventListener('DOMContentLoaded', () => {
             drawWheel();
             updateCategoryDisplay();
+            updateHistoryDisplay();
 
             document.getElementById('spin-button').addEventListener('click', startSpin);
             document.getElementById('reset-button').addEventListener('click', reset);
+            document.getElementById('clear-history-button').addEventListener('click', clearHistory);
         });
     </script>
 </body>
