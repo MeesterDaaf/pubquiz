@@ -99,8 +99,7 @@
 
         .title-container {
             position: relative;
-            padding: 2rem;
-            margin-bottom: 2rem;
+
         }
 
         .title-main {
