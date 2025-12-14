@@ -476,9 +476,11 @@
             const spinButton = document.getElementById('spin-button');
             const resetButton = document.getElementById('reset-button');
             const resultDiv = document.getElementById('result');
+            const currentCategoryContainer = document.querySelector('.current-category-container');
             const timerDuration = parseInt(document.getElementById('timer-duration').value) || 3;
 
             spinButton.disabled = true;
+            currentCategoryContainer.classList.remove('hidden');
             resultDiv.classList.add('hidden');
             timeRemaining = timerDuration;
             document.getElementById('timer-value').textContent = timeRemaining;
@@ -588,6 +590,7 @@
                             // Show result
                             document.getElementById('result-category').textContent = selectedCategory;
                             resultDiv.classList.remove('hidden');
+                            currentCategoryContainer.classList.add('hidden');
                             spinButton.disabled = false;
                             resetButton.classList.remove('hidden');
                             isSpinning = false;
