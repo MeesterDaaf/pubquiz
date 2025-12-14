@@ -232,7 +232,7 @@
         }
     </style>
 </head>
-<body class="disco-bg text-white min-h-screen flex items-center justify-center p-6">
+<body class="disco-bg text-white min-h-screen  p-6">
     <div class="disco-shine"></div>
     <div class="w-full max-w-7xl mx-auto disco-overlay">
         <div class="title-container text-center">
@@ -241,17 +241,53 @@
             <p class="title-subtitle">Hitster Bingo</p>
         </div>
 
-        <div class="flex flex-col lg:flex-row gap-6">
-            <!-- Main Content -->
-            <div class="disco-lights  flex-1 bg-white/95 dark:bg-[#161615]/95 backdrop-blur-sm rounded-lg shadow-2xl p-8 border-2 border-white/20">
-            <!-- Timer Display -->
-            <div class="text-center mb-8">
-                <div id="timer" class="text-6xl font-bold text-[#f53003] dark:text-[#FF4433] mb-4">
-                    <span id="timer-value">3</span>
+        <div class="flex flex-col lg:flex-row gap-6 min-h-[600px]">
+            <!-- Left Sidebar with Controls -->
+            <div class="disco-lights w-full lg:w-80 bg-white/95 dark:bg-[#161615]/95 backdrop-blur-sm rounded-lg shadow-2xl p-6 border-2 border-white/20">
+                <!-- Timer Display -->
+                <div class="text-center mb-8">
+                    <div id="timer" class="text-6xl font-bold text-[#f53003] dark:text-[#FF4433] mb-4">
+                        <span id="timer-value">3</span>
+                    </div>
+                    <p class="text-sm text-[#706f6c] dark:text-[#A1A09A]">seconden</p>
                 </div>
-                <p class="text-sm text-[#706f6c] dark:text-[#A1A09A]">seconden</p>
+
+                <!-- Controls -->
+                <div class="flex flex-col gap-4 justify-center items-center mb-8">
+                    <button
+                        id="spin-button"
+                        class="w-full px-8 py-3 bg-[#1b1b18] dark:bg-[#EDEDEC] text-white dark:text-[#1b1b18] rounded-lg font-semibold hover:bg-black dark:hover:bg-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        Start Draaien
+                    </button>
+                    <button
+                        id="reset-button"
+                        class="w-full px-8 py-3 bg-[#dbdbd7] dark:bg-[#3E3E3A] text-[#1b1b18] dark:text-[#EDEDEC] rounded-lg font-semibold hover:bg-[#c4c4c0] dark:hover:bg-[#62605b] transition-colors hidden"
+                    >
+                        Opnieuw
+                    </button>
+                </div>
+
+                <!-- Settings -->
+                <div class="pt-8 border-t border-[#e3e3e0] dark:border-[#3E3E3A]">
+                    <div class="flex flex-col items-center justify-center gap-4">
+                        <label for="timer-duration" class="text-sm text-[#706f6c] dark:text-[#A1A09A]">
+                            Timer duur (seconden):
+                        </label>
+                        <input
+                            type="number"
+                            id="timer-duration"
+                            min="1"
+                            max="10"
+                            value="3"
+                            class="w-20 px-3 py-2 border border-[#e3e3e0] dark:border-[#3E3E3A] rounded-lg bg-white dark:bg-[#161615] text-[#1b1b18] dark:text-[#EDEDEC]"
+                        >
+                    </div>
+                </div>
             </div>
 
+            <!-- Main Content -->
+            <div class="disco-lights  flex-1 bg-white/95 dark:bg-[#161615]/95 backdrop-blur-sm rounded-lg shadow-2xl p-8 border-2 border-white/20">
             <!-- Spinning Wheel Container -->
             <div class="relative flex items-center justify-center mb-8" style="height: 400px;">
                 <div id="wheel-container" class="relative w-80 h-80">
@@ -274,10 +310,10 @@
             </div>
 
             <!-- Current Category Display -->
-            <div class="text-center mb-8">
+            <div class="text-center mb-8 current-category-container">
                 <p class="text-sm text-[#706f6c] dark:text-[#A1A09A] mb-2">Huidige categorie:</p>
-                <div id="current-category" class="text-3xl font-bold text-[#1b1b18] dark:text-[#EDEDEC] min-h-12 flex items-center justify-center">
-                    <span id="category-text">-</span>
+                <div id="current-category" class="text-3xl font-bold text-[#1b1b18] dark:text-[#EDEDEC] h-20 flex items-center justify-center">
+                    <span id="category-text" class="px-4 text-center leading-tight">-</span>
                 </div>
             </div>
 
@@ -286,39 +322,6 @@
                 <div class="bg-[#fff2f2] dark:bg-[#1D0002] rounded-lg p-6 border-2 border-[#f53003] dark:border-[#FF4433]">
                     <p class="text-sm text-[#706f6c] dark:text-[#A1A09A] mb-2">De gekozen categorie is:</p>
                     <p id="result-category" class="text-4xl font-bold text-[#f53003] dark:text-[#FF4433]"></p>
-                </div>
-            </div>
-
-            <!-- Controls -->
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <button
-                    id="spin-button"
-                    class="px-8 py-3 bg-[#1b1b18] dark:bg-[#EDEDEC] text-white dark:text-[#1b1b18] rounded-lg font-semibold hover:bg-black dark:hover:bg-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                    Start Draaien
-                </button>
-                <button
-                    id="reset-button"
-                    class="px-8 py-3 bg-[#dbdbd7] dark:bg-[#3E3E3A] text-[#1b1b18] dark:text-[#EDEDEC] rounded-lg font-semibold hover:bg-[#c4c4c0] dark:hover:bg-[#62605b] transition-colors hidden"
-                >
-                    Opnieuw
-                </button>
-            </div>
-
-            <!-- Settings -->
-            <div class="mt-8 pt-8 border-t border-[#e3e3e0] dark:border-[#3E3E3A]">
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <label for="timer-duration" class="text-sm text-[#706f6c] dark:text-[#A1A09A]">
-                        Timer duur (seconden):
-                    </label>
-                    <input
-                        type="number"
-                        id="timer-duration"
-                        min="1"
-                        max="10"
-                        value="3"
-                        class="w-20 px-3 py-2 border border-[#e3e3e0] dark:border-[#3E3E3A] rounded-lg bg-white dark:bg-[#161615] text-[#1b1b18] dark:text-[#EDEDEC]"
-                    >
                 </div>
             </div>
             </div>
@@ -458,6 +461,7 @@
 
         function updateCategoryDisplay(rotation = null) {
             const categoryText = document.getElementById('category-text');
+
             if (rotation !== null) {
                 currentIndex = getCategoryFromRotation(rotation);
             }
@@ -468,6 +472,7 @@
             if (isSpinning) return;
 
             isSpinning = true;
+
             const spinButton = document.getElementById('spin-button');
             const resetButton = document.getElementById('reset-button');
             const resultDiv = document.getElementById('result');
